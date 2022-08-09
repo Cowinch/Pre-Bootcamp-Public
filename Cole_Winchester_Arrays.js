@@ -93,7 +93,10 @@ function swap(array){
 }
 
 function dojo(array){
-    var arr=array;
+    var oldArray=array; var arr=[];
+    for(i=0;i<oldArray.length;i++){
+        arr.push(oldArray[i]);
+    }
     for(i=0;i<arr.length;i++){
         if(0>arr[i]){
             arr[i]="dojo";
@@ -113,5 +116,6 @@ function runArray(length, min, num,Y){
     console.log("[" + noNeg(wholeArray) + "]"+ " is the array with negatives removed");
     console.log(minMaxAvg(wholeArray)+" is the min value, max value, and average, respectively");
     console.log(swap(wholeArray)+" is the first and last value swapped");
+    console.log(dojo(wholeArray)+" is the negative values replaced with a String");
 }
 x=runArray(5,-15,15,generateRandomInteger(3,10));
