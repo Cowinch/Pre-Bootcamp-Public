@@ -47,20 +47,21 @@ function greaterY(array,Y){
 }
 
 function squareVal(array){
-    var squared=array;
+    var oldArray=array; var squared=[];
+    for(i=0;i<oldArray.length;i++){
+        squared.push(oldArray[i]);
+    }
     for(i=0;i<squared.length;i++){
         squared[i]=squared[i]*squared[i];
     }
     return squared;
 }
 
-function copyArray(array){
-    var arr=array;
-    return arr;
-}
-
 function noNeg(array){
-    var positives=array;
+    var oldArray=array; var positives=[];
+    for(i=0;i<oldArray.length;i++){
+        positives.push(oldArray[i]);
+    }
     for(i=0;i<positives.length;i++){
         if(positives[i]<0){
             positives[i]=0;
@@ -69,21 +70,48 @@ function noNeg(array){
     return positives;
 }
 
+function minMaxAvg(array){
+    var oldArray=array; var newArray=[oldArray[0],oldArray[0],oldArray[0]];
+    for(i=1;i<oldArray.length;i++){
+        if(newArray[0]>oldArray[i]){
+            newArray[0]=oldArray[i];
+        }
+        if(newArray[1]<oldArray[i]){
+            newArray[1]=oldArray[i];
+        }
+        newArray[2]=newArray[2]+oldArray[i];
+    }
+    newArray[2]=newArray[2]/oldArray.length;
+    return newArray;
+}
+
+function swap(array){
+    var swapped=array; var placeholder=swapped[0];
+    swapped[0]=swapped[swapped.length-1];
+    swapped[swapped.length-1]=placeholder;
+    return swapped;
+}
+
+function dojo(array){
+    var arr=array;
+    for(i=0;i<arr.length;i++){
+        if(0>arr[i]){
+            arr[i]="dojo";
+        }
+    }
+    return arr;
+}
+
 function runArray(length, min, num,Y){
     var wholeArray=generateArray(length,min,num); 
-    var squareArray=copyArray(wholeArray);
     console.log(wholeArray);
-    a=sumArr(wholeArray);
-    console.log("the sum of the array is " + a);
-    b=maxArr(wholeArray);
-    console.log("the highest number of the array is " + b);
-    c=meanArr(wholeArray);
-    console.log("the average of the array is " + c);
-    d=greaterY(wholeArray,Y);
-    console.log("the number of numbers that is above " + Y + " is " + d);
-    e=squareVal(squareArray);
-    console.log("[" + e + "]" + " is the array sqaured");
-    f=noNeg(wholeArray);
-    console.log("[" + f + "]"+ " is the array with negatives removed");
+    console.log("the sum of the array is " + sumArr(wholeArray));
+    console.log("the highest number of the array is " + maxArr(wholeArray));
+    console.log("the average of the array is " + meanArr(wholeArray));
+    console.log("the number of numbers that is above " + Y + " is " + greaterY(wholeArray,Y));
+    console.log("[" + squareVal(wholeArray) + "]" + " is the array sqaured");
+    console.log("[" + noNeg(wholeArray) + "]"+ " is the array with negatives removed");
+    console.log(minMaxAvg(wholeArray)+" is the min value, max value, and average, respectively");
+    console.log(swap(wholeArray)+" is the first and last value swapped");
 }
 x=runArray(5,-15,15,generateRandomInteger(3,10));
